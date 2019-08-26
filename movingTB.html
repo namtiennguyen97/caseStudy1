@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>2b</title>
+    <script src="bacground.js"></script>
+    <link rel="stylesheet" href="fashion.css">
+    <script src="bullet.js"></script>
+</head>
+<body onload="start()">
+<marquee scrollamount="50">
+    <img src="cloudpixel6.png" height="500" width="1200"/>
+    <img src="cloudpixel3.png" height="500" width="1200"/>
+    <img src="cloudpixel4.png" height="500" width="1200"/>
+    <img src="cloudpixel6.png" height="500" width="1200"/>
+</marquee>
+<img src="Rocket_Ship_moving_1 - Copy.gif" height="100" width="200" style="top: 0px; left: 0px; position: absolute"
+     id="myPic"/>
+<div id="bullet"></div>
+<div id="plane"></div>
+<script>
+    // tao cac function cho key
+    //tao player
+    let WarPlane = function (image,x,y,size) {
+        this.x = x;
+        this.y = y;
+        this.size = size;
+        this.getAirPlane = function () { // ? chua dung den
+            return "<img width='" + this.size + "' height='" + this.size + "' src='" + this.image + "' style='top: " + this.x + "px; left: " + this.y + "px; position: absolute'/>"
+        }
+        this.down = function () {
+            let kDown = document.getElementById("myPic");
+            kDown.style.top = parseInt(kDown.style.top) - 5 + "px";
+        }
+        this.up = function () {
+            let kUp = document.getElementById("myPic");
+            kUp.style.top = parseInt(kUp.style.top) + 5 + "px";
+        }
+        this.left = function () {
+            let kLeft = document.getElementById("myPic");
+            kLeft.style.left = parseInt(kLeft.style.left) - 5 + "px";
+        }
+        this.right = function () {
+            let kRight = document.getElementById("myPic");
+            kRight.style.left = parseInt(kRight.style.left) + 5 + "px";
+        }
+    };
+    //khai bao doi tuong air
+    let air = new WarPlane();
+air.getAirPlane("Rocket_Ship_moving_1 - Copy.gif",0,0,70);
+    // tao function goi cac phim
+    function moving(evt) {
+        switch (evt.keyCode) {
+            case 37:
+                air.left();
+                break;
+            case 38:
+                air.down();
+                break;
+            case 39:
+                air.right();
+                break;
+            case 40:
+                air.up();
+                break;
+            case 32: // phim space
+                shoot();
+                break;
+        }
+    };
+    // tao mot function goi keycode
+    function start() {
+        window.addEventListener('keydown', moving);
+        document.getElementById("plane").innerHTML = air.getAirPlane();
+    }
+</script>
+</body>
+</html>
